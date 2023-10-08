@@ -4,21 +4,20 @@ import com.rivskyinc.imageflow.data.ImageApi
 import com.rivskyinc.imageflow.domain.ImageRepository
 import com.rivskyinc.imageflow.domain.entities.Image
 import retrofit2.Response
+import javax.inject.Inject
 
-class  ImageRepositoryImpl(private val imageApi : ImageApi) : ImageRepository {
+class ImageRepositoryImpl @Inject constructor(private val imageApi: ImageApi) : ImageRepository {
     override suspend fun getAllImages(): Image? {
-        try {
+        return try {
             val response: Response<Image?> = imageApi.imageResponse()
 
             if (response.isSuccessful) {
-                return response.body() ?: throw RuntimeException("Response body is null")
+                response.body() ?: throw RuntimeException("Response body is null")
             } else {
-//                throw RuntimeException("HTTP Error: ${response.code()}")
-                return null
+                null
             }
         } catch (e: Exception) {
-//            throw RuntimeException("Request Error: ${e.message}")
-            return null
+            null
         }
 
     }
