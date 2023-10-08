@@ -5,7 +5,7 @@ import javax.inject.Inject
 
 class GetImageUseCase @Inject constructor(private val imageRepository: ImageRepository) {
 
-    suspend fun getListOfImage() : Image? {
+    suspend fun invoke() : Image? {
         return imageRepository.getAllImages()
     }
 }
