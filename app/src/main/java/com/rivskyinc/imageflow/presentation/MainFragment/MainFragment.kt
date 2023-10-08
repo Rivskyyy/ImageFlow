@@ -1,4 +1,4 @@
-package com.rivskyinc.imageflow.presentation
+package com.rivskyinc.imageflow.presentation.MainFragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
