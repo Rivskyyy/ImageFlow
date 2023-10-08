@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.rivskyinc.imageflow.R
@@ -43,6 +44,19 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        binding.progressBar.visibility = View.GONE
+
+        viewModel.imageList.observe( viewLifecycleOwner) {
+            if ( it!= null ){
+                myAdapter.submitList(it.photos.photo)
+            } else {
+                binding.progressBar.visibility = View.VISIBLE
+                Toast.makeText(this.context, "No Internet connection", Toast.LENGTH_LONG).show()
+            }
+
+
+        }
+
     }
 
     private fun setupRecyclerView() {
@@ -50,7 +64,6 @@ class MainFragment : Fragment() {
                 myAdapter = MyListAdapter()
                 adapter = myAdapter
                 layoutManager = GridLayoutManager(context, 1)
-
             }
     }
 
