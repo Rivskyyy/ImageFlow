@@ -1,4 +1,4 @@
-package com.rivskyinc.imageflow.data.db
+package com.rivskyinc.imageflow.di
 
 import com.rivskyinc.imageflow.Utils.Const.BASE_URL
 import com.rivskyinc.imageflow.data.ImageApi
