@@ -42,10 +42,17 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setupRecyclerView()
     }
 
+    private fun setupRecyclerView() {
+            binding.recyclerViewMain.apply {
+                myAdapter = MyListAdapter()
+                adapter = myAdapter
+                layoutManager = GridLayoutManager(context, 1)
 
+            }
+    }
 
     companion object {
 
