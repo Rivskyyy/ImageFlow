@@ -1,7 +1,6 @@
 package com.rivskyinc.imageflow.di
 
 import android.app.Application
-import androidx.fragment.app.Fragment
 import com.rivskyinc.imageflow.presentation.MainFragment.MainFragment
 import dagger.BindsInstance
 import dagger.Component
