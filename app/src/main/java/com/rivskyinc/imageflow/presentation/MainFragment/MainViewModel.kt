@@ -1,5 +1,6 @@
 package com.rivskyinc.imageflow.presentation.MainFragment
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 class MainViewModel @Inject  constructor(private val getImageUseCase: GetImageUseCase):  ViewModel()  {
 
-    private var imageList= MutableLiveData<Image>()
+    private var _imageList= MutableLiveData<Image>()
+    val imageList : LiveData<Image> = _imageList
 
     init {
         viewModelScope.launch {
@@ -29,7 +31,7 @@ class MainViewModel @Inject  constructor(private val getImageUseCase: GetImageUs
     private suspend fun getLatestPhoto(){
         try {
             val data = getImageUseCase.invoke()
-            imageList.postValue(data)
+            _imageList.postValue(data)
         } catch (e: HttpException) {
             throw RuntimeException("HttpException : $e ")
         } catch (e: IOException) {
