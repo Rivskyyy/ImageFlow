@@ -1,14 +1,13 @@
 package com.rivskyinc.imageflow.presentation.MainFragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.rivskyinc.imageflow.R
 import com.rivskyinc.imageflow.databinding.FragmentMainBinding
 import com.rivskyinc.imageflow.presentation.ImageApplication
 import com.rivskyinc.imageflow.presentation.adapter.MyListAdapter
@@ -17,6 +16,7 @@ import javax.inject.Inject
 class MainFragment : Fragment() {
 
     private lateinit var binding : FragmentMainBinding
+
     @Inject
     lateinit var viewModelFactory: MainViewModelFactory
 
@@ -24,13 +24,9 @@ class MainFragment : Fragment() {
         ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
     }
     private lateinit var myAdapter :MyListAdapter
-    private val component by lazy{
-        (this.requireActivity().application as ImageApplication).component
-    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        component.inject(this@MainFragment)
-        super.onCreate(savedInstanceState)
+    private val component by lazy{
+        (this@MainFragment.activity?.application as ImageApplication).component
     }
 
     override fun onCreateView(
@@ -42,6 +38,7 @@ class MainFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        component.inject(this)
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         binding.progressBar.visibility = View.GONE
@@ -54,7 +51,6 @@ class MainFragment : Fragment() {
                 Toast.makeText(this.context, "No Internet connection", Toast.LENGTH_LONG).show()
             }
 
-
         }
 
     }
@@ -63,7 +59,7 @@ class MainFragment : Fragment() {
             binding.recyclerViewMain.apply {
                 myAdapter = MyListAdapter()
                 adapter = myAdapter
-                layoutManager = GridLayoutManager(context, 1)
+                layoutManager = GridLayoutManager(context, 3)
             }
     }
 

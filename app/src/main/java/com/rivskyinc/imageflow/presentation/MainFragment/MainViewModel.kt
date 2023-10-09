@@ -1,5 +1,6 @@
 package com.rivskyinc.imageflow.presentation.MainFragment
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,6 +32,7 @@ class MainViewModel @Inject  constructor(private val getImageUseCase: GetImageUs
     private suspend fun getLatestPhoto(){
         try {
             val data = getImageUseCase.invoke()
+            Log.d("MainViewModel", data.toString())
             _imageList.postValue(data)
         } catch (e: HttpException) {
             throw RuntimeException("HttpException : $e ")

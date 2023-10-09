@@ -53,8 +53,6 @@ dependencies {
     // Coroutine Lifecycle
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    //Gif
-    implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.27")
     //Glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     // Dagger 2
