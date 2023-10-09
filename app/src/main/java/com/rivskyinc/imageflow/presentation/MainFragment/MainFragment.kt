@@ -9,9 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.rivskyinc.imageflow.R
-import com.rivskyinc.imageflow.databinding.FragmentDetailBinding
 import com.rivskyinc.imageflow.databinding.FragmentMainBinding
-import com.rivskyinc.imageflow.presentation.DetailFragment
+import com.rivskyinc.imageflow.presentation.DetailFragment.DetailFragment
 import com.rivskyinc.imageflow.presentation.ImageApplication
 import com.rivskyinc.imageflow.presentation.adapter.MyListAdapter
 import javax.inject.Inject
@@ -49,10 +48,13 @@ class MainFragment : Fragment() {
 
         myAdapter.onClickListener = {
             val detailFragment = DetailFragment.newInstance(
+//                it.urls.url.toString(),
                 "https://live.staticflickr.com/" +
                         it.server + "/" +
                         it.id + "_" +
-                        it.secret + ".jpg"
+                        it.secret + ".jpg",
+                it.title,
+                it.id
             )
             val fragmentManager = requireActivity().supportFragmentManager
             fragmentManager.beginTransaction()
@@ -67,6 +69,7 @@ class MainFragment : Fragment() {
         viewModel.imageList.observe(viewLifecycleOwner) {
             if (it != null) {
                 myAdapter.submitList(it.photos.photo)
+
             } else {
                 binding.progressBar.visibility = View.VISIBLE
                 Toast.makeText(this.context, "No Internet connection", Toast.LENGTH_LONG).show()

@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.load.HttpException
-import com.rivskyinc.imageflow.domain.GetImageUseCase
+import com.rivskyinc.imageflow.domain.UseCases.GetImageUseCase
 import com.rivskyinc.imageflow.domain.entities.Image
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

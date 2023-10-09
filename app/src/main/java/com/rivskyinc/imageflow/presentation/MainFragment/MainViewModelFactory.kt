@@ -2,7 +2,7 @@ package com.rivskyinc.imageflow.presentation.MainFragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.rivskyinc.imageflow.domain.GetImageUseCase
+import com.rivskyinc.imageflow.domain.UseCases.GetImageUseCase
 import javax.inject.Inject
 
 class MainViewModelFactory @Inject constructor(private val getImageUseCase: GetImageUseCase) :
