@@ -7,7 +7,7 @@ import retrofit2.Response
 
 interface ImageApi {
 
-    @GET("rest/?method=flickr.interestingness.getList&api_key=$API_KEY") // <- put your API_KEY here
+    @GET("rest/?method=flickr.interestingness.getList&api_key=$API_KEY&format=json&nojsoncallback=1") // <- put your API_KEY here
     suspend fun imageResponse() : Response<Image?>
 
 }

@@ -8,14 +8,17 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.rivskyinc.imageflow.R
+import com.rivskyinc.imageflow.databinding.FragmentDetailBinding
 import com.rivskyinc.imageflow.databinding.FragmentMainBinding
+import com.rivskyinc.imageflow.presentation.DetailFragment
 import com.rivskyinc.imageflow.presentation.ImageApplication
 import com.rivskyinc.imageflow.presentation.adapter.MyListAdapter
 import javax.inject.Inject
 
 class MainFragment : Fragment() {
 
-    private lateinit var binding : FragmentMainBinding
+    private lateinit var binding: FragmentMainBinding
 
     @Inject
     lateinit var viewModelFactory: MainViewModelFactory
@@ -23,9 +26,9 @@ class MainFragment : Fragment() {
     private val viewModel: MainViewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
     }
-    private lateinit var myAdapter :MyListAdapter
+    private lateinit var myAdapter: MyListAdapter
 
-    private val component by lazy{
+    private val component by lazy {
         (this@MainFragment.activity?.application as ImageApplication).component
     }
 
@@ -33,7 +36,7 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMainBinding.inflate(layoutInflater, container, false )
+        binding = FragmentMainBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -43,8 +46,26 @@ class MainFragment : Fragment() {
         setupRecyclerView()
         binding.progressBar.visibility = View.GONE
 
-        viewModel.imageList.observe( viewLifecycleOwner) {
-            if ( it!= null ){
+
+        myAdapter.onClickListener = {
+            val detailFragment = DetailFragment.newInstance(
+                "https://live.staticflickr.com/" +
+                        it.server + "/" +
+                        it.id + "_" +
+                        it.secret + ".jpg"
+            )
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.beginTransaction()
+                .replace(
+                    R.id.main_container,
+                    detailFragment
+                )
+                .addToBackStack(null)
+                .commit()
+        }
+
+        viewModel.imageList.observe(viewLifecycleOwner) {
+            if (it != null) {
                 myAdapter.submitList(it.photos.photo)
             } else {
                 binding.progressBar.visibility = View.VISIBLE
@@ -56,15 +77,10 @@ class MainFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-            binding.recyclerViewMain.apply {
-                myAdapter = MyListAdapter()
-                adapter = myAdapter
-                layoutManager = GridLayoutManager(context, 3)
-            }
-    }
-
-    companion object {
-
-
+        binding.recyclerViewMain.apply {
+            myAdapter = MyListAdapter()
+            adapter = myAdapter
+            layoutManager = GridLayoutManager(context, 3)
+        }
     }
 }
