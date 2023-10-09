@@ -3,8 +3,9 @@ package com.rivskyinc.imageflow.di
 import com.rivskyinc.imageflow.Utils.Const.BASE_URL
 import com.rivskyinc.imageflow.data.ImageApi
 import com.rivskyinc.imageflow.data.repositoryImpl.ImageRepositoryImpl
-import com.rivskyinc.imageflow.domain.GetImageUseCase
+import com.rivskyinc.imageflow.domain.UseCases.GetImageUseCase
 import com.rivskyinc.imageflow.domain.ImageRepository
+import com.rivskyinc.imageflow.domain.UseCases.GetImageDetailUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,6 +38,11 @@ object AppModule {
     fun providesGetImageUseCase(repository: ImageRepository): GetImageUseCase {
 
         return GetImageUseCase(repository)
+    }
+
+    @Provides
+    fun providesGetImageDetailUseCase(repository: ImageRepository) : GetImageDetailUseCase{
+        return GetImageDetailUseCase(repository)
     }
 
 }
