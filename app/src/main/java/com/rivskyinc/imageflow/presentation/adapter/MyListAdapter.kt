@@ -1,5 +1,6 @@
 package com.rivskyinc.imageflow.presentation.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -28,9 +29,21 @@ class MyListAdapter : ListAdapter<Photo, MyListAdapter.PhotoViewHolder>(PhotoIte
 
         val listOfPhotos = getItem(position)
         holder.binding.tvTitle.text = listOfPhotos.title
-        Glide.with(holder.itemView).load(listOfPhotos.owner)
-            .into(holder.binding.gifIv)
+        val url =
+            "https://live.staticflickr.com/" + listOfPhotos.server +
+                    "/" +
+                    listOfPhotos.id +
+                    "_" +
+                    listOfPhotos.secret +
+                    ".jpg"
 
+        Glide.with(holder.itemView)
+            .load(url)
+            .into(holder.binding.mainImageView)
+
+        Log.d(
+            "Adapter",
+            url)
 
         holder.itemView.setOnClickListener {
             onClickListener?.invoke(listOfPhotos)
