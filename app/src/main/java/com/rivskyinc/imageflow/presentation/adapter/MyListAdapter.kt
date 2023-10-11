@@ -1,17 +1,15 @@
 package com.rivskyinc.imageflow.presentation.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.rivskyinc.imageflow.Utils.Const.BASE_IMAGE_URL
 import com.rivskyinc.imageflow.databinding.ItemsLayoutBinding
 import com.rivskyinc.imageflow.domain.entities.Photo
 
-class MyListAdapter : ListAdapter<Photo, MyListAdapter.PhotoViewHolder>(PhotoItemCallback()) {
-
-    var onClickListener: ((Photo) -> Unit)? = null
+class MyListAdapter(private val itemClickListener: (Photo, Int) -> Unit) : ListAdapter<Photo, MyListAdapter.PhotoViewHolder>(PhotoItemCallback()) {
 
     class PhotoViewHolder(val binding: ItemsLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -30,23 +28,21 @@ class MyListAdapter : ListAdapter<Photo, MyListAdapter.PhotoViewHolder>(PhotoIte
         val listOfPhotos = getItem(position)
         holder.binding.tvTitle.text = listOfPhotos.title
         val url =
-            "https://live.staticflickr.com/" + listOfPhotos.server +
+            BASE_IMAGE_URL + listOfPhotos.server +
                     "/" +
                     listOfPhotos.id +
                     "_" +
                     listOfPhotos.secret +
-                    ".jpg"
+                    "_q.jpg"
 
         Glide.with(holder.itemView)
             .load(url)
             .into(holder.binding.mainImageView)
 
-        Log.d(
-            "Adapter",
-            url)
-
         holder.itemView.setOnClickListener {
-            onClickListener?.invoke(listOfPhotos)
+            val photo = getItem(position)
+            itemClickListener(photo, position)
         }
+
     }
 }
