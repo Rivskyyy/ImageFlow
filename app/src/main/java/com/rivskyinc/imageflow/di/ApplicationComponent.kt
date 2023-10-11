@@ -1,8 +1,8 @@
 package com.rivskyinc.imageflow.di
 
 import android.app.Application
-import com.rivskyinc.imageflow.presentation.DetailFragment.DetailFragment
-import com.rivskyinc.imageflow.presentation.MainFragment.MainFragment
+import com.rivskyinc.imageflow.presentation.detailFragment.DetailFragment
+import com.rivskyinc.imageflow.presentation.mainFragment.MainFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

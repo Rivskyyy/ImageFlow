@@ -5,7 +5,7 @@
     android:id="@+id/main_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.MainFragment.MainFragment">
+    tools:context=".presentation.mainFragment.MainFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_main"

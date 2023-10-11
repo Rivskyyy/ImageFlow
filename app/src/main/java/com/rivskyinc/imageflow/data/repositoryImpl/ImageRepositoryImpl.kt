@@ -4,7 +4,6 @@ import com.rivskyinc.imageflow.data.ImageApi
 import com.rivskyinc.imageflow.domain.ImageRepository
 import com.rivskyinc.imageflow.domain.entities.Image
 import com.rivskyinc.imageflow.domain.entities.PhotoX.Result
-import com.rivskyinc.imageflow.domain.entities.Photos
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -21,7 +20,6 @@ class ImageRepositoryImpl @Inject constructor(private val imageApi: ImageApi) : 
         } catch (e: Exception) {
             null
         }
-
     }
 
     override suspend fun getDetail(id : String ): Result? {

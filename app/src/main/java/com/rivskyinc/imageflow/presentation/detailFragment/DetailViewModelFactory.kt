@@ -1,9 +1,8 @@
-package com.rivskyinc.imageflow.presentation.DetailFragment
+package com.rivskyinc.imageflow.presentation.detailFragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.rivskyinc.imageflow.domain.UseCases.GetImageDetailUseCase
-import com.rivskyinc.imageflow.presentation.MainFragment.MainViewModel
 import javax.inject.Inject
 
 class DetailViewModelFactory @Inject constructor(private val getImageDetailUseCase: GetImageDetailUseCase)

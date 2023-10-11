@@ -4,6 +4,6 @@
     android:id="@+id/main_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="com.rivskyinc.imageflow.presentation.MainFragment.MainFragment"
+    android:name="com.rivskyinc.imageflow.presentation.mainFragment.MainFragment"
     tools:context=".presentation.MainActivity"
     tools:layout="@layout/fragment_main" />

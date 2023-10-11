@@ -1,4 +1,4 @@
-package com.rivskyinc.imageflow.presentation.MainFragment
+package com.rivskyinc.imageflow.presentation.mainFragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
