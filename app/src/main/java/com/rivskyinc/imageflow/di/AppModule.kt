@@ -1,7 +1,11 @@
 package com.rivskyinc.imageflow.di
 
+import android.app.Application
+import androidx.room.Room
 import com.rivskyinc.imageflow.Utils.Const.BASE_URL
 import com.rivskyinc.imageflow.data.ImageApi
+import com.rivskyinc.imageflow.data.db.AppDatabase
+import com.rivskyinc.imageflow.data.db.ImageDao
 import com.rivskyinc.imageflow.data.repositoryImpl.ImageRepositoryImpl
 import com.rivskyinc.imageflow.domain.UseCases.GetImageUseCase
 import com.rivskyinc.imageflow.domain.ImageRepository
@@ -43,6 +47,19 @@ object AppModule {
     @Provides
     fun providesGetImageDetailUseCase(repository: ImageRepository) : GetImageDetailUseCase{
         return GetImageDetailUseCase(repository)
+    }
+    @Provides
+    @Singleton
+    fun provideAppDatabase(application: Application): AppDatabase {
+        return Room.databaseBuilder(application, AppDatabase::class.java, "app_database")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideDao(appDatabase: AppDatabase): ImageDao {
+        return appDatabase.imageDao()
     }
 
 }
