@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -55,6 +56,7 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     //Glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+
     // Dagger 2
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-android-compiler:2.48")
@@ -65,7 +67,7 @@ dependencies {
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
-
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
