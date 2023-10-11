@@ -1,5 +1,8 @@
 package com.rivskyinc.imageflow.domain.entities
 
+import java.io.Serializable
+
+
 data class Photo(
     val farm: Int,
     val id: String,
@@ -10,4 +13,4 @@ data class Photo(
     val secret: String,
     val server: String,
     val title: String
-)
+) : Serializable
